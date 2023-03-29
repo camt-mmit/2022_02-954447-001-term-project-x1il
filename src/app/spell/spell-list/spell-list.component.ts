@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { List, SearchData, Spell } from '../models';
+import { SearchData, Spell } from '../models';
 
 @Component({
   selector: 'app-spell-list',
@@ -11,40 +11,39 @@ import { List, SearchData, Spell } from '../models';
   styleUrls: ['./spell-list.component.scss']
 })
 export class SpellListComponent implements OnInit {
-  @Input() data!: List<Spell>;
+  @Input() data!: Array<Spell>;
   @Input() search?: SearchData;
+
   @Output() searchChange = new EventEmitter<SearchData>();
   @Output() itemSelected = new EventEmitter<Spell>();
+
   protected formGroup!: FormGroup<{
     search: FormControl<string>;
   }>;
 
   private fb: NonNullableFormBuilder;
-  public list: Spell[] = [];
-  private filterList: Spell[] = [];
 
   constructor(fb: FormBuilder) {
     this.fb = fb.nonNullable;
   }
-  
+
   ngOnInit(): void {
     if (!this.data) {
-     
-      throw new Error(`Property 'data' is required`);
+      throw new Error('Data is required!');
     }
+
     this.formGroup = this.fb.group({
-      search: this.search?.search ?? '',
+      search: this.search?.search?? '',
     });
-    this.list = this.data.items;
   }
+
   protected doSearch(): void {
     const value = this.formGroup.value;
     if (value.search) {
       const search = value.search?.toLowerCase();
-      this.list = this.data.items.filter(
+      this.data = this.data.filter(
         (item) =>
-          item.name.toLowerCase().includes(search) ||
-          item.description.toLowerCase().includes(search)
+          item.name.toLowerCase().includes(search)
       );
       this.searchChange.emit(this.formGroup.value);
     } else {
@@ -53,12 +52,23 @@ export class SpellListComponent implements OnInit {
   }
 
   protected doClear(): void {
-    this.formGroup.setValue({ search: '' });
+    this.formGroup.setValue({search: '' });
     this.searchChange.emit({});
+  }
+
+  protected changePage(searchParms?: URLSearchParams): void {
+    const search = searchParms?.get('search');
+    const page = searchParms?.get('page');
+
+    const SearchData = {
+      ...(search ? { search } : {}),
+      ...(page ? { page } : {}),
+    };
+
+    this.searchChange.emit(SearchData);
   }
 
   protected doSelect(item: Spell): void {
     this.itemSelected.emit(item);
   }
-
 }

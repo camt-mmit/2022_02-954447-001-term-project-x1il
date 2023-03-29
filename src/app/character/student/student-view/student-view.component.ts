@@ -11,6 +11,7 @@ import { Student } from '../../models';
 })
 export class StudentViewComponent implements OnInit{
   @Input() data!: Student;
+  
   ngOnInit(): void {
     if(!this.data){
       throw new Error('Method not implemented.');

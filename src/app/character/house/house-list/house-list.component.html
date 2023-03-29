@@ -21,8 +21,6 @@
     <button type="next" [disabled]="!data.next" (click)="changepage(data.next?.searchParams)" class="cmp-buttion">Next</button>
 </div> -->
 <div *ngFor="let item of data" (click)="doSelect(item)" tabindex="0"    (keydown.enter)="doSelect(item)">
-    <div>
-        <img [src]="item.image" alt="" width="150px"><br>
-        <h3>{{item.name}}</h3>
-    </div>
+    <img [src]="item.image_url" alt="" width="150px">
+    <h3>{{item.name}}</h3>
 </div>

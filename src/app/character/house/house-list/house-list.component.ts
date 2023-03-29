@@ -1,31 +1,28 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchData, Staff } from '../../models';
+import { House, SearchData } from '../../models';
 import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { StaffListPageComponent } from '../../router/staff/staff-list-page/staff-list-page.component';
 
 @Component({
-  selector: 'app-staff-list',
+  selector: 'app-house-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, StaffListPageComponent],
-  templateUrl: './staff-list.component.html',
-  styleUrls: ['./staff-list.component.scss']
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './house-list.component.html',
+  styleUrls: ['./house-list.component.scss']
 })
-export class StaffListComponent implements OnInit{
-
-  @Input() data!: Array<Staff>;
+export class HouseListComponent implements OnInit{
+  @Input() data!: Array<House>;
   @Input() search?: SearchData
 
   @Output() searchChange = new  EventEmitter<SearchData>();
-  @Output() itemSelected = new EventEmitter<Staff>();
+  @Output() itemSelected = new EventEmitter<House>();
 
   protected formGroup!:FormGroup<{
     search:FormControl<string>;
   }>;
 
   private fb: NonNullableFormBuilder;
-  public list: Staff[] = [];
+  public list: House[] = [];
 
   // private subscription: Subscription | null = null;
   constructor(fb:FormBuilder){
@@ -58,7 +55,7 @@ export class StaffListComponent implements OnInit{
       const search = value.search?.toLowerCase();
       this.data = this.data.filter(
         (item) =>
-          item.name.toLowerCase().includes(search)
+          item.house.toLowerCase().includes(search)
       );
       this.searchChange.emit(this.formGroup.value);
     } else {
@@ -89,7 +86,7 @@ export class StaffListComponent implements OnInit{
     this.searchChange.emit(searchData);
   }
 
-  protected doSelect(item: Staff): void {
+  protected doSelect(item: House): void {
     this.itemSelected.emit(item);
   }
 }

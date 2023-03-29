@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { map, Observable, switchMap } from 'rxjs';
-import { List, SearchData, Student } from 'src/app/character/models';
+import { Observable, switchMap } from 'rxjs';
+import { SearchData, Student } from 'src/app/character/models';
 import { StudentService } from 'src/app/character/services/student.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentListComponent } from 'src/app/character/student/student-list/student-list.component';
@@ -43,7 +43,12 @@ export class StudentListPageComponent {
       replaceUrl: true,
     });
   }
-  // protected doSelect(item: Student): void{
-  //   this.itemSelected.emit(item);
-  // }
+  protected doSelect(item: Student): void{
+     const paths = item.name.split('/');
+     const name = paths[paths.length];
+
+     this.router.navigate([name], {
+      relativeTo: this.route,
+     })
+  }
 }

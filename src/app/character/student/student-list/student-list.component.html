@@ -54,9 +54,9 @@
   </nav> -->
 
 
-<div *ngFor="let item of data" >
-    <div>
-      <img [src]="item.image" alt="">
-      <div>{{item.name}}</div>
-    </div>
+<div *ngFor="let item of data" (click)="doSelect(item)" tabindex="0" (keydown.enter)="doSelect(item)">
+  <div>
+    <img [src]="item.image" alt="" width="150px"><br>
+    <h3>{{item.name}}</h3>
+  </div>
 </div>

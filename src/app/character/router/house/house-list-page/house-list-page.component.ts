@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { StaffListComponent } from 'src/app/character/staff/staff-list/staff-list.component';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
-import { List, SearchData, Staff } from 'src/app/character/models';
-import { StaffService } from 'src/app/character/services/staff.service';
+import { House, SearchData } from 'src/app/character/models';
+import { HouseService } from 'src/app/character/services/house.service';
+import { HouseListComponent } from 'src/app/character/house/house-list/house-list.component';
 
 @Component({
-  selector: 'app-staff-list-page',
+  selector: 'app-house-list-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, StaffListComponent],
-  templateUrl: './staff-list-page.component.html',
-  styleUrls: ['./staff-list-page.component.scss']
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, HouseListComponent],
+  templateUrl: './house-list-page.component.html',
+  styleUrls: ['./house-list-page.component.scss']
 })
-export class StaffListPageComponent {
-  protected readonly data$: Observable<Array<Staff>>;
+export class HouseListPageComponent {
+  protected readonly data$: Observable<Array<House>>;
 
   protected searchData: SearchData | undefined;
 
   constructor(
-    dataService: StaffService, 
+    dataService: HouseService, 
     private route: ActivatedRoute, 
     private readonly router: Router,){
     //this.data$ = dataService.getAll({page:'2'});

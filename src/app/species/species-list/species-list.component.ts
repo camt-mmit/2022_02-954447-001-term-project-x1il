@@ -1,21 +1,21 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { SearchData, Student } from '../../models';
+import { FormGroup, FormControl, NonNullableFormBuilder, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Specie, SearchData } from '../models';
 
 @Component({
-  selector: 'app-student-list',
+  selector: 'app-species-list',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.scss']
+  templateUrl: './species-list.component.html',
+  styleUrls: ['./species-list.component.scss']
 })
-export class StudentListComponent implements OnInit {
-  @Input() data!: Array<Student>;
+export class SpeciesListComponent implements OnInit {
+  @Input() data!: Array<Specie>;
   @Input() search?: SearchData;
 
   @Output() searchChange = new EventEmitter<SearchData>();
-  @Output() itemSelected = new EventEmitter<Student>();
+  @Output() itemSelected = new EventEmitter<Specie>();
 
   protected formGroup!: FormGroup<{
     search: FormControl<string>;
@@ -29,16 +29,12 @@ export class StudentListComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.data) {
-      throw new Error(`Property 'data' is required!`);
+      throw new Error('Data is required!');
     }
 
     this.formGroup = this.fb.group({
-      search: this.search?.search ?? '',
+      search: this.search?.search?? '',
     });
-  }
-
-  protected get pageOffset(): number {
-    return (+(this.search?.page ?? 1) - 1) * 10;
   }
 
   protected doSearch(): void {
@@ -56,23 +52,23 @@ export class StudentListComponent implements OnInit {
   }
 
   protected doClear(): void {
-    this.formGroup.setValue({ search: '' });
+    this.formGroup.setValue({search: '' });
     this.searchChange.emit({});
   }
 
-  protected changePage(searchParams?: URLSearchParams): void {
-    const search = searchParams?.get('search');
-    const page = searchParams?.get('page');
+  protected changePage(searchParms?: URLSearchParams): void {
+    const search = searchParms?.get('search');
+    const page = searchParms?.get('page');
 
-    const searchData = {
+    const SearchData = {
       ...(search ? { search } : {}),
       ...(page ? { page } : {}),
     };
 
-    this.searchChange.emit(searchData);
+    this.searchChange.emit(SearchData);
   }
 
-  protected doSelect(item: Student): void {
+  protected doSelect(item: Specie): void {
     this.itemSelected.emit(item);
   }
 }

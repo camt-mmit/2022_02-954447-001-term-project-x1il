@@ -1,4 +1,4 @@
-import { List, RawList, RawStaff, RawStudent, Staff, Student } from './models';
+import { List, RawList } from './models';
 
 export function parseList<I, O>(
   obj: RawList<I>,
@@ -25,17 +25,17 @@ export function parseList<I, O>(
 //   return parseList(obj, parseStudent);
 // }
 
-export function parseStaff(obj: RawStaff): Staff {
-  return {
-    ...obj,
-    dateOfBirth: new Date(obj.dateOfBirth),
-    yearOfBirth: new Date(obj.yearOfBirth),
-    alternate_names: obj.alternate_names,
-    alternate_actors: obj.alternate_actors,
-    image: new URL(obj.image),
-  };
-}
+// export function parseStaff(obj: RawStaff): Staff {
+//   return {
+//     ...obj,
+//     dateOfBirth: new Date(obj.dateOfBirth),
+//     yearOfBirth: new Date(obj.yearOfBirth),
+//     alternate_names: obj.alternate_names,
+//     alternate_actors: obj.alternate_actors,
+//     image: new URL(obj.image),
+//   };
+// }
 
-export function parseStaffList(obj: RawList<RawStaff>): List<Staff> {
-  return parseList(obj, parseStaff);
-}
+// export function parseStaffList(obj: RawList<RawStaff>): List<Staff> {
+//   return parseList(obj, parseStaff);
+// }

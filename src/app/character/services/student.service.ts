@@ -12,11 +12,13 @@ export class StudentService {
   get(arg0: any): any {
     throw new Error('Method not implemented.');
   }
+
   constructor(private readonly http: HttpClient) {}
 
   getAll(searchData?: SearchData): Observable<Array<Student>> {
     return this.http.get<Array<Student>>(url, { params: searchData });
   }
+  
   // get (id: string):Observable<Student> {
   //   return this.http
   //     .get<RawStudent>(`${url}/${id}`)

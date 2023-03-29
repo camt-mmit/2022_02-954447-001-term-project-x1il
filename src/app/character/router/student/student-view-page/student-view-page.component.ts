@@ -18,8 +18,7 @@ export class StudentViewPageComponent {
 
   constructor(dataService: StudentService, route: ActivatedRoute) {
     this.data$ = route.params.pipe(
-      switchMap((params) => dataService.get(params['id']) as Observable<Student>),
+      switchMap((params) => dataService.get(params['name']) as Observable <Student> ),
     );
   }
-  
 }
