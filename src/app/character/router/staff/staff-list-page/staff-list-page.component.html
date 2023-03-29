@@ -1,8 +1,8 @@
-<app-staff-list>
+<app-staff-list
     *ngIf = "data$ | async as data; else loading" 
     [data]="data"
     [search] = "searchData"
-    (searchChange)="search($event)"
+    (searchChange)="search($event)">
     <!-- (itemSelected)="doSelect($event)"> -->
 </app-staff-list>
 

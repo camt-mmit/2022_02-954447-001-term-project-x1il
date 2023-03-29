@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { List, SearchData, Spell } from '../models';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-spell-list',
@@ -20,28 +19,23 @@ export class SpellListComponent implements OnInit {
     search: FormControl<string>;
   }>;
 
-  // private fb: NonNullableFormBuilder;
+  private fb: NonNullableFormBuilder;
   public list: Spell[] = [];
   private filterList: Spell[] = [];
 
-  // constructor(fb: FormBuilder) {
-  //   this.fb = fb.nonNullable;
-  // }
-  // ngOnInit(): void {
-  //   if (!this.data) {
-  //     throw new Error(`Property 'data' is required`);
-  //   }
-  //   this.formGroup = this.fb.group({
-  //     search: this.search?.search ?? '',
-  //   });
-  //   this.list = this.data.items;
-  // }
-  constructor(private http: HttpClient){ }
+  constructor(fb: FormBuilder) {
+    this.fb = fb.nonNullable;
+  }
+  
   ngOnInit(): void {
-    this.http.get<Spell[]>('https://hp-api.onrender.com/api/spells')
-    .subscribe(Response =>{
-      this.list = Response;
-    })
+    if (!this.data) {
+     
+      throw new Error(`Property 'data' is required`);
+    }
+    this.formGroup = this.fb.group({
+      search: this.search?.search ?? '',
+    });
+    this.list = this.data.items;
   }
   protected doSearch(): void {
     const value = this.formGroup.value;
@@ -66,4 +60,5 @@ export class SpellListComponent implements OnInit {
   protected doSelect(item: Spell): void {
     this.itemSelected.emit(item);
   }
+
 }

@@ -9,12 +9,54 @@
             search
         </span>
     </button>
+    <button type="button" (click)="doClear()">
+        <span class="material-symbols-outlined">
+            clear
+        </span>
+    </button>
     <br>
 </form>
+
 <!-- <div class="group-buttion">
     <button type="button" [disabled]="!data.previous" (click)="changepage(data.previous?.searchParams)" class="cmp-buttion">Previous</button>
     <button type="next" [disabled]="!data.next" (click)="changepage(data.next?.searchParams)" class="cmp-buttion">Next</button>
-</div> -->
-<div *ngFor="let item of list" (click)="doSelect(item)" tabindex="0"    (keydown.enter)="doSelect(item)">
-    {{item.name}}
+</div>
+
+<!-- <nav class="cmp-pagination">
+    <div>
+      <b>Item(s) : </b>
+      <span class="cl-number">
+        <span *ngIf="data.count">
+          [{{ pageOffset + 1 | number }} -
+          {{ pageOffset + data.items.length | number }}]<b>/</b>
+        </span>
+        <span>{{ data.count | number }}</span>
+      </span>
+    </div>
+    <button
+      type="button"
+      role="link"
+      [disabled]="!data.previous"
+      (click)="changePage(data.previous?.searchParams)"
+    >
+      <i class="material-symbols-outlined">navigate_before</i>
+      Previous
+    </button>
+    <button
+      type="button"
+      role="link"
+      [disabled]="!data.next"
+      (click)="changePage(data.next?.searchParams)"
+    >
+      Next
+      <i class="material-symbols-outlined">navigate_next</i>
+    </button>
+  </nav> -->
+
+
+<div *ngFor="let item of data" >
+    <div>
+      <img [src]="item.image" alt="">
+      <div>{{item.name}}</div>
+    </div>
 </div>

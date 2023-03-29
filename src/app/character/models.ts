@@ -2,17 +2,17 @@ type Raw<T, KI extends keyof T, O> = {
     [K in keyof T]:K extends KI ? O :T[K];
 };
 export type List<T> = {
-    name:string
+    count:number;
     next: URL | null;
     previous :URL | null;
-    items: T[];
+    results: T[];
 };
 
 export type RawList<T> = Raw<List<T>, 'next' | 'previous', string>;
 
 export type SearchData = {
-    search?:string,
-    page?:string
+    search?:string;
+    page?:string;
 };
 
 export type Student = {  
@@ -42,7 +42,7 @@ export type Student = {
     image: URL;
 };
 
-export type RawStudent = Raw<Raw<Raw<Student, 'alternate_names' | 'alternate_actors', string[]>, 'dateOfBirth' | 'yearOfBirth', string>, 'image', string>
+export type RawStudent = Raw<Raw<Student, 'dateOfBirth' | 'yearOfBirth', string>, 'image', string>
 
 export type Staff = {
     id: string;

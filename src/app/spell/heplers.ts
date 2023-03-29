@@ -6,7 +6,7 @@ export function parseList<I, O>(obj: RawList<I>, parser: (value:I) => O): List<O
       ...obj,
       next: obj.next ? new URL(obj.next): null,
       previous: obj.previous ? new URL(obj.previous) : null,
-      items: obj.items.map((value) => parser((value))),
+      items: obj.items ? obj.items.map((value) => parser((value))): [],
   };
 }
 

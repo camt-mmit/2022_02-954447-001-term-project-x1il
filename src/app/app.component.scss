@@ -7,7 +7,7 @@
   }
   
   
-  * {
+  li {
       text-align: right;
       list-style: none;
       font-size: 24px;
@@ -39,3 +39,16 @@
         'GRAD' 0,
         'opsz' 48
       }
+      .cmp-nav-links li {
+        display: flex;
+        align-items: center;
+      }
+      
+      .cmp-nav-links img {
+        margin-right: 10px;
+      }
+      
+      .cmp-nav-links a:first-child {
+        margin-right: auto;
+      }
+      

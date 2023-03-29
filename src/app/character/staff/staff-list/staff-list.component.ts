@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { List, SearchData, Staff } from '../../models';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { StaffListPageComponent } from '../../router/staff/staff-list-page/staff-list-page.component';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-staff-list',
@@ -25,47 +24,55 @@ export class StaffListComponent implements OnInit{
     search:FormControl<string>;
   }>;
 
-  // private fb: NonNullableFormBuilder;
+  private fb: NonNullableFormBuilder;
   public list: Staff[] = [];
 
   // private subscription: Subscription | null = null;
-  // constructor(fb:FormBuilder){
-  //   this.fb =fb.nonNullable;
-  // }
-  
-  // ngOnInit(): void {
-  //   if(!this.data) {
-  //     throw new Error(`Property 'data' is required!`);
-  //   }
-
-  //   this.formGroup = this.fb.group({
-  //     search: this.search?.search ??'',
-  //   });
-  //   this.list = this.data.items;
-  // }
-  
-  constructor(private http: HttpClient){ }
-  ngOnInit(): void {
-    this.http.get<Staff[]>('https://hp-api.onrender.com/api/characters/staff')
-    .subscribe(Response =>{
-      this.list = Response;
-    })
+  constructor(fb:FormBuilder){
+    this.fb =fb.nonNullable;
   }
   
+  ngOnInit(): void {
+    if(!this.data) {
+      throw new Error(`Property 'data' is required!`);
+    }
+
+    this.formGroup = this.fb.group({
+      search: this.search?.search ??'',
+    });
+    // this.list = this.data.items;
+  }
+  
+  // constructor(private http: HttpClient){ }
+  // ngOnInit(): void {
+  //   this.http.get<Staff[]>('https://hp-api.onrender.com/api/characters/staff')
+  //   .subscribe(Response =>{
+  //     this.list = Response;
+  //   })
+  // }
   
   protected doSearch(): void {
     const value = this.formGroup.value;
+
     if (value.search) {
-      const search = value.search?.toLowerCase();
-      this.list = this.data.items.filter(
-        (item) =>
-          item.name.toLowerCase().includes(search)
-      );
       this.searchChange.emit(this.formGroup.value);
     } else {
       this.doClear();
     }
   }
+  // protected doSearch(): void {
+  //   const value = this.formGroup.value;
+  //   if (value.search) {
+  //     const search = value.search?.toLowerCase();
+  //     this.list = this.data.items.filter(
+  //       (item) =>
+  //         item.name.toLowerCase().includes(search)
+  //     );
+  //     this.searchChange.emit(this.formGroup.value);
+  //   } else {
+  //     this.doClear();
+  //   }
+  // }
 
   //   doSearch(name:string,){
   //     this.http.get<Student[]>('https://hp-api.onrender.com/api/characters/students?name='+name)

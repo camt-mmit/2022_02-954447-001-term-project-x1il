@@ -2,7 +2,7 @@ type Raw<T, KI extends keyof T, O> = {
     [K in keyof T]:K extends KI ? O :T[K];
 };
 export type List<T> = {
-    name:string
+    count:number
     next: URL | null;
     previous :URL | null;
     items: T[];

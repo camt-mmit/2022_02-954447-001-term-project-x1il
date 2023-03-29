@@ -9,12 +9,17 @@
             search
         </span>
     </button>
+    <button type="button" (click)="doClear()">
+        <span class="material-symbols-outlined">
+            clear
+        </span>
+    </button>
     <br>
 </form>
 <!-- <div class="group-buttion">
     <button type="button" [disabled]="!data.previous" (click)="changepage(data.previous?.searchParams)" class="cmp-buttion">Previous</button>
     <button type="next" [disabled]="!data.next" (click)="changepage(data.next?.searchParams)" class="cmp-buttion">Next</button>
 </div> -->
-<div *ngFor="let item of list" (click)="doSelect(item)" tabindex="0"    (keydown.enter)="doSelect(item)">
+<div *ngFor="let item of data.results" (click)="doSelect(item)" tabindex="0"    (keydown.enter)="doSelect(item)">
     {{item.name}}
 </div>
