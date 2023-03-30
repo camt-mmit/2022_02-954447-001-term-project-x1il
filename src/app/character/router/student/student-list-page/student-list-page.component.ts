@@ -43,12 +43,12 @@ export class StudentListPageComponent {
       replaceUrl: true,
     });
   }
-  protected doSelect(item: Student): void{
-     const paths = item.name.split('/');
-     const name = paths[paths.length];
+  protected doSelect(item: Student): void {
+    const id = item.id;
 
-     this.router.navigate([name], {
+    this.router.navigate([id], {
       relativeTo: this.route,
-     })
+    })
   }
+  
 }

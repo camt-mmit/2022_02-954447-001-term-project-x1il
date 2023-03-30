@@ -13,7 +13,7 @@ export const routes: Route[] = [
         children: [
             {path:'',redirectTo: 'student',pathMatch: 'full'},
             {path:'student',component:StudentListPageComponent},
-            {path:'student/:name',component: StudentViewPageComponent},
+            {path:'student/:id',component: StudentViewPageComponent},
 
             {path:'staff',component: StaffListPageComponent},
             {path:'species/:name',component: StaffViewPageComponent},

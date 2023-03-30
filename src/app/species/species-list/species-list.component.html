@@ -17,6 +17,6 @@
     <br>
 </form>
 
-<div *ngFor="let item of data">
+<div *ngFor="let item of data"(click)="doSelect(item)" tabindex="0" (keydown.enter)="doSelect(item)">
     {{ item.name }} <br><br>
 </div>

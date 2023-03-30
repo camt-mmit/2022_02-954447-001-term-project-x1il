@@ -12,4 +12,5 @@ export type SearchData = {
 export type Specie = {
     id: number;
     name: string;
+    native: string;
 };

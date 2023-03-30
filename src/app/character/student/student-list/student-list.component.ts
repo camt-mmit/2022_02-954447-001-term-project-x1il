@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SearchData, Student } from '../../models';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-student-list',
@@ -11,6 +12,7 @@ import { SearchData, Student } from '../../models';
   styleUrls: ['./student-list.component.scss']
 })
 export class StudentListComponent implements OnInit {
+  [x: string]: any;
   @Input() data!: Array<Student>;
   @Input() search?: SearchData;
 
@@ -26,6 +28,7 @@ export class StudentListComponent implements OnInit {
   constructor(fb: FormBuilder) {
     this.fb = fb.nonNullable;
   }
+
 
   ngOnInit(): void {
     if (!this.data) {
@@ -73,6 +76,8 @@ export class StudentListComponent implements OnInit {
   }
 
   protected doSelect(item: Student): void {
+    // this['router'].navigate(['/student-view', item.name]);
     this.itemSelected.emit(item);
+
   }
 }

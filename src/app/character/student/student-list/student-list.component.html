@@ -1,3 +1,7 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <form [formGroup]="formGroup" (ngSubmit)="doSearch()" class="cmp-search-form">
     <label for="">
@@ -53,10 +57,84 @@
     </button>
   </nav> -->
 
-
-<div *ngFor="let item of data" (click)="doSelect(item)" tabindex="0" (keydown.enter)="doSelect(item)">
-  <div>
-    <img [src]="item.image" alt="" width="150px"><br>
-    <h3>{{item.name}}</h3>
+<!-- 
+  <div class="test">
+    <div class="row row-cols-5 row-cols-md-3 g-4">
+      <div *ngFor="let item of data" (click)="doSelect(item)" tabindex="0" (keydown.enter)="doSelect(item)">
+      <div class="col">
+        <div class="card" style="width: 10rem;">
+          <img src="{{item.image}}" class="card-img-top" alt="..."  width="150px">
+          <div class="card-body">
+            <h3 class="card-title">{{item.name}}</h3>
+          </div>
+          <tr>
+            <th>Company</th>
+            <th>Contact</th> 
+          </tr>
+          <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td> 
+          </tr>
+        </div>
+    </div>
   </div>
-</div>
+  </div> -->
+  <div *ngFor="let item of data" (click)="doSelect(item)" tabindex="0" (keydown.enter)="doSelect(item)">
+    <div class="card text-center">
+      <div class="card-body">
+        <h3 class="card-title">{{item.name}}</h3>
+        <img src="{{item.image}}" class="card-img-top" alt="..."  width="50px" style="width: 200px;">
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <tr>
+            <td><b>Name</b></td>
+            <td>{{item.name}}</td>
+          </tr>
+          <tr>
+            <td><b>House</b></td>
+            <td>{{item.house}}</td>
+          </tr>
+          <tr>
+            <td><b>Gender</b></td>
+            <td *ngIf="item.gender === 'male'">♂</td>
+            <td *ngIf="item.gender === 'female'">♀</td>
+            <!-- <td>{{item.gender}} ♂</td> -->
+          </tr>
+          <tr>
+            <td><b>Date Of Birth</b></td>
+            <td>{{item.dateOfBirth}}</td>
+          </tr>
+          <tr>
+            <td><b>Year Of Birth</b></td>
+            <td>{{item.yearOfBirth}}</td>
+          </tr>
+          <tr>
+            <td><b>Wizard</b></td>
+            <td *ngIf="item.wizard">☑</td>
+            <td *ngIf="!item.wizard">☒</td>
+          </tr>
+          <tr>
+            <td><b>Ancestry</b></td>
+            <td>{{item.ancestry}}</td>
+          </tr>
+          <tr>
+            <td><b>Eye Colour</b></td>
+            <td>{{item.eyeColour}}</td>
+          </tr>
+          <tr>
+            <td><b>HairColour</b></td>
+            <td>{{item.hairColour}}</td>
+          </tr>
+          <tr>
+            <td><b>Patronus</b></td>
+            <td>{{item.patronus}}</td>
+          </tr>
+          <tr>
+            <td><b>Alive</b></td>
+            <td>{{item.alive}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>

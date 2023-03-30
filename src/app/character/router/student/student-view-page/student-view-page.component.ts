@@ -21,4 +21,7 @@ export class StudentViewPageComponent {
       switchMap((params) => dataService.get(params['name']) as Observable <Student> ),
     );
   }
+  protected doBack(): void {
+    history.back();
+  }
 }

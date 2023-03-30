@@ -2,8 +2,8 @@
     *ngIf="data$ | async as data; else loading"
     [data]="data"
     [search]="searchData"
-    (searchChange)="search($event)">
-    <!---(itemSelected)="doSelect($event)">--->
+    (searchChange)="search($event)"
+    (itemSelected)="doSelect($event)">
 </app-species-list>
 
 <ng-template #loading>

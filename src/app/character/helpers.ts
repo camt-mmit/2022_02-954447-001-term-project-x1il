@@ -1,4 +1,4 @@
-import { List, RawList } from './models';
+import { List, RawList, Student } from './models';
 
 export function parseList<I, O>(
   obj: RawList<I>,
@@ -10,6 +10,12 @@ export function parseList<I, O>(
     previous: obj.previous ? new URL(obj.previous) : null,
     results: obj.results ? obj.results.map((value) => parser(value)) : [],
   };
+}
+
+export function parseSpecie(obj: Student): Student {
+  return {
+      ...obj,
+  }
 }
 
 // export function parseStudent(obj: RawStudent): Student {

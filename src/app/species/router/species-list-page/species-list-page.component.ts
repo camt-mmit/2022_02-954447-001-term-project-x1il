@@ -31,4 +31,11 @@ export class SpeciesListPageComponent {
       replaceUrl: true,
     });
   }
+  protected doSelect(item: Specie): void {
+    const id = item.id;
+
+    this.router.navigate([id], {
+      relativeTo: this.route,
+    })
+  }
 }

@@ -14,7 +14,7 @@ export class StudentViewComponent implements OnInit{
   
   ngOnInit(): void {
     if(!this.data){
-      throw new Error('Method not implemented.');
+      throw new Error('Data is required!');
     }
   }
 }

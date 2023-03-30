@@ -1,9 +1,15 @@
+<nav>
+  <button type="button" (click)="doBack()" role="link">
+    <i class="material-symbols-outlined">navigate_before</i>
+    Back
+  </button>
+</nav>
+
 <app-student-view
-    *ngIf="data$ | async as data; else loading"
-    [data]="data"
-></app-student-view>
-  
+  *ngIf="data$ | async as data; else loading"
+  [data]="data">
+</app-student-view>
+
 <ng-template #loading>
   <div>Loading...</div>
 </ng-template>
-  
